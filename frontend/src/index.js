@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import AccBoardApp from './AccBoardApp';
+import AccBoardsApp from './AccBoardsApp';
 
 import './index.css';
 
 ReactDOM.render(
-	<AccBoardApp />,
+	<AccBoardsApp />,
 
 	document.getElementById('root')
 );
