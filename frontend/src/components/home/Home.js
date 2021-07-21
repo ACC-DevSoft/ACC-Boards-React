@@ -1,6 +1,6 @@
 import React from 'react';
-import { Button, Container, Grid, Typography } from '@material-ui/core';
-import { Link } from 'react-router-dom';
+import {Container, Grid, Typography } from '@material-ui/core';
+import { Link} from 'react-router-dom';
 
 export default function Home(){
     return(
@@ -11,7 +11,7 @@ export default function Home(){
                     <p>Maneja <span>tareas</span> de forma organizada, controla tu <span>equipo de trabajo</span> y mejora tus tiempos prodcutivos.</p>
                 </div>
                 <div>
-                        <Link component="button" color="primary" to="/register">Empezar</Link>
+                    <Link component="button" color="primary" to="/register">Empezar</Link>
                     {/* <Button variant="contained" color="primary">Empezar</Button> */}
                 </div>
             </Grid>
