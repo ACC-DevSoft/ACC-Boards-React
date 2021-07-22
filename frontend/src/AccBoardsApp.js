@@ -6,6 +6,7 @@ import  ListWorkSpaces from "./components/workspaces/ListWorkSpaces";
 import Profile from './components/users/Profile';
 import ListRole from './components/admin/ListRole';
 import LoginPage from './components/auth/LoginPage';
+import RegisterPage from './components/auth/RegisterPage';
 
 
 function AccBoardsApp() {
@@ -18,6 +19,7 @@ function AccBoardsApp() {
 				<Route path="/WorkSpaces" ><ListWorkSpaces/></Route>
 				<Route path="/Profile" ><Profile/></Route>
 				<Route path="/ListRole" ><ListRole/></Route>
+				<Route path="/register" ><RegisterPage/></Route>
 				<Route path="/Login" ><LoginPage/></Route>
 
 			</Switch>

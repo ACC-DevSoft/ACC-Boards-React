@@ -58,3 +58,60 @@ button { margin: 10px; background-color: var(--blue);}
 .element{
     min-width: 35vw;
 }
+
+/* Register */
+.container{
+    height: 75%;
+    margin: 5px auto;
+    padding-top: 60px;
+    text-decoration: none;
+}
+
+
+.text-home{
+    color: var(--grayTwo);
+    font-size: 28px;
+}
+
+.text-home .title{
+    text-align: start;
+    margin: 6% 0 6%;
+    font-size: 50px;
+    line-height: 50px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    font-style:italic ;
+}
+.text-home p{
+    color: var(--black);
+    line-height: 30px;
+    font-weight: 300;
+    font-size: 30px;
+    font-stretch: condensed;
+}
+.card{
+    padding: 5px;
+}
+
+.card .card-title{
+    margin: 15px;
+    font-size: 30px;
+    text-align: center;
+    color:var(--black);
+    font-family: 'Roboto',sans-serif;
+    font-style: italic;
+}
+.card form{
+    margin-top: -10px;
+    border-top:  1px solid var(--grayTwo);
+}
+.card .btn{
+    width: 100%;
+    margin-top: 15px;
+    padding: 5px;
+    display: block;
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--white);
+    background-color: var(--blue);
+}
