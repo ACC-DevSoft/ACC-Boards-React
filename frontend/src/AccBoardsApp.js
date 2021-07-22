@@ -1,7 +1,7 @@
 import './AccBoards.css';
 import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
 import Navbar from "./components/home/Navbar";
-import Home from "./components/home/home";
+import Home from "./components/home/Home";
 import  ListWorkSpaces from "./components/workspaces/ListWorkSpaces";
 import Profile from './components/users/Profile';
 import ListRole from './components/admin/ListRole';
