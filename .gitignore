@@ -2,4 +2,5 @@
 /backend/uploads/users/*.*
 /backend/uploads/tasks/*.*
 /frontend/node_modules/
+/frontend/package-lock.json
 
