@@ -7,10 +7,10 @@ import ListUsers from './components/admin/ListUsers';
 import './index.css';
 
 ReactDOM.render(
-	// <AccBoardsApp />,
+	<AccBoardsApp />,
 	// <Profile />,
 	//<ListRole />,
-	<ListUsers />,
+	// <ListUsers />,
 
 	document.getElementById('root')
 );
