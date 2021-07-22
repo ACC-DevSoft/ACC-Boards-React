@@ -3,6 +3,7 @@ import MaterialTable from "material-table";
 import Edit from "@material-ui/icons/Edit";
 import DeleteOutline from "@material-ui/icons/DeleteOutline";
 import axios from "axios";
+import useStyles from "./styleListRole";
 
 const baseUrl = "http://localhost:3025/api/user/listUsers";
 
@@ -17,7 +18,7 @@ const columnas = [
   },
   {
     title: "Role",
-    field: "role",
+    field: "roleId.name",
   },
   {
     title: "Status",
@@ -29,68 +30,18 @@ const columnas = [
   },
 ];
 
-const data1 = [
-  {
-    name: "Pepe",
-    email: "pepe@gmail.com",
-    role: "Admin",
-    status: "active",
-    date: "jun 25 2021",
-  },
-  {
-    name: "Pepa",
-    email: "pepe@gmail.com",
-    role: "Admin",
-    status: "active",
-    date: "feb 25 2021",
-  },
-  {
-    name: "Pepe",
-    email: "pepe@gmail.com",
-    role: "Admin",
-    status: "active",
-    date: "apr 25 2021",
-  },
-  {
-    name: "Pepita",
-    email: "pepe@gmail.com",
-    role: "Admin",
-    status: "active",
-    date: "feb 25 2021",
-  },
-  {
-    name: "Pepe",
-    email: "pepe@gmail.com",
-    role: "Admin",
-    status: "active",
-    date: "feb 25 2021",
-  },
-  {
-    name: "Pepis",
-    email: "pepe@gmail.com",
-    role: "Admin",
-    status: "active",
-    date: "mar 25 2021",
-  },
-  {
-    name: "Pepe",
-    email: "pepe@gmail.com",
-    role: "Admin",
-    status: "active",
-    date: "feb 25 2021",
-  },
-];
-
 axios.defaults.baseURL = "http://localhost:3025/api";
 
 const ListUsers = () => {
+  const classes = useStyles();
+
   const [response, setResponse] = useState(null);
   const [error, setError] = useState("");
   const [loading, setloading] = useState(true);
   const [data, setData] = useState([]);
 
-  const fetchData = () => {
-    axios
+  const fetchData = async() => {
+    await axios
       .get("/user/listUsers")
       .then((res) => {
         setData(res.data.users);
@@ -106,9 +57,9 @@ const ListUsers = () => {
     });
   };
 
-  useEffect(() => {
-    fetchData();
-  }, [response]);
+  useEffect(async() => {
+    await fetchData();
+  }, []);
 
   return (
     <>
@@ -117,7 +68,7 @@ const ListUsers = () => {
       <h4>Total Users: {data.length}</h4>
 
       <div>
-        <MaterialTable
+        <MaterialTable className={classes.table}
           columns={columnas}
           data={data}
           title="Users"
@@ -147,3 +98,4 @@ const ListUsers = () => {
 };
 
 export default ListUsers;
+
