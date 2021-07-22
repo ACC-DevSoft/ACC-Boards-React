@@ -5,14 +5,14 @@ const User = require("../models/user");
 const Role = require("../models/role");
 
 router.post("/login", async (req, res) => {
-  if(!req.body.email || !req.body.password) return res.status(400).send("Incomplete data.");
+  if(!req.body.email || !req.body.password) return res.status(400).send({message:"Incomplete data."});
 
   const user = await User.findOne({ email: req.body.email });
-  if (!user) return res.status(400).send("Incorrect email or password");
+  if (!user) return res.status(400).send({ message:"Incorrect email or password"});
 
   const hash = await bcrypt.compare(req.body.password, user.password);
   if (!user.status || !hash)
-    return res.status(400).send("Incorrect email or password");
+    return res.status(400).send({ message:"Incorrect email or password"});
   try {
     const jwtToken = user.generateJWT();
     const { name } = await Role.findById(`${user.roleId}`);
@@ -29,7 +29,7 @@ router.post("/login", async (req, res) => {
     let current = user.id;
     return res.status(200).send({ token:jwtToken, user:userSend, role:role,current });
   } catch (e) {
-    return res.status(400).send("Login error");
+    return res.status(400).send({ message:"Login error"});
   }
 });
 
