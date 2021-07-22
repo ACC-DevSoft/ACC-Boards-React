@@ -1,11 +1,12 @@
 import './AccBoards.css';
+import React from 'react';
+import AddWorkSpaces from './components/workspaces/AddWorkSpaces';
+import LoginPage from './components/auth/LoginPage';
 
 function AccBoardsApp() {
 	return (
-		<div>
-			<h1>Acc Boards App</h1>
-		</div>
+		<LoginPage />
 	);
-}
+};
 
 export default AccBoardsApp;
