@@ -1,15 +1,42 @@
-import React from 'react';
-import { Button, Container, Typography,Card, CardHeader, CardContent} from "@material-ui/core";
+import React, {useSate, useState} from 'react';
+import { Button, Container, Typography,Card, CardContent, Modal,Paper, TextField} from "@material-ui/core";
 import { Link } from 'react-router-dom';
 import { Add, People, Delete } from "@material-ui/icons";
 import  "./Styles.css";
 const ListWorkSpaces = () => {
 
+    const [open, setOpen] = useState(false);
+
+    const openForm = ()=>{
+        setOpen(true);
+    };
+
+    const closeForm = () =>{
+            setOpen(false);
+    };
+    const workForm = (
+        <Card>
+            <Typography>Add WorkSpace</Typography>
+            <h/>
+            <Paper>
+            <form className noValidate autoComplete="off">
+                 <TextField label="input" variant="filled" type="text"/>
+                 <TextField label="input" variant="filled" type="text"/>
+            </form>
+            </Paper>
+        </Card>
+
+    );
+
     return (
         <Container className="container">
             <Typography variant="h5">WorkSpaces</Typography>
-            <Button className="btn-purple"  variant="contained" color="primary"><Add/>Add workspaces</Button>
+            <Button className="btn-purple"  variant="contained" color="primary" onClick={openForm}><Add/>Add workspaces</Button>
             <hr/>
+            <Modal open={open} onClose={closeForm}  aria-labelledby="simple-modal-title"
+                aria-describedby="simple-modal-description">
+                    {workForm}
+            </Modal>
             <div className="row">
                 <div className="col">
                     <h3>My work Spaces</h3>

@@ -33,6 +33,12 @@
     background-color: var(--purple);
     color: var(--white);
 }
+.modal{ 
+    width: 600px;
+    margin: auto auto;
+    top:10%;
+    z-index: 999;
+}
 
 h1,h2,h3,h4,h5,h6{
     color: var(--grayTwo);
