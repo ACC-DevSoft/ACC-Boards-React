@@ -67,7 +67,7 @@ router.post("/registerUser", async (req, res) => {
   }
 });
 
-router.get("/listUsers/:userName?",  async (req, res) => {
+router.get("/listUsers/:userName?", Auth, UserAuth, Admin, async (req, res) => {
 	const users = await User.find({
 		userName: new RegExp(req.params["userName"], "i"),
 	})
