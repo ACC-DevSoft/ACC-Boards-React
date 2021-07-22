@@ -81,18 +81,34 @@ const data1 = [
   },
 ];
 
+axios.defaults.baseURL = "http://localhost:3025/api";
+
 const ListUsers = () => {
+  const [response, setResponse] = useState(null);
+  const [error, setError] = useState("");
+  const [loading, setloading] = useState(true);
   const [data, setData] = useState([]);
 
-  const peticionGet = async () => {
-    await axios.get(baseUrl).then((response) => {
-      console.log("la data es : " + response.data);
+  const fetchData = () => {
+    axios
+      .get("/user/listUsers")
+      .then((res) => {
+        setData(res.data.users);
+        console.log(res.data.users.length);
+        console.log(data)
+      })
+      .catch((err) => {
+        setError(err);
+        console.log(err);
+      })
+      .finally(() => {
+        setloading(false);
     });
   };
 
-  useEffect(async () => {
-    await peticionGet;
-  }, []);
+  useEffect(() => {
+    fetchData();
+  }, [response]);
 
   return (
     <>
