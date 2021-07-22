@@ -39,7 +39,7 @@ const ListRole = () => {
     fetchData();
   }, [data]);
 
-  console.log(data.data.length)
+  console.log(data.length)
 
   return (
     <Container className={classes.container}>
