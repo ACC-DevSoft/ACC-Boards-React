@@ -69,16 +69,16 @@ const ListRole = () => {
           actions={[
             {
               icon: Edit,
-              tooltip: "Edit User",
+              tooltip: "Edit Role",
               onClick: (event, rowData) =>
                 alert("You want to edit the user: " + rowData.name),
             },
             {
               icon: DeleteOutline,
-              tooltip: "Delete User",
+              tooltip: "Delete Role",
               onClick: (event, rowData) =>
                 window.confirm(
-                  "Are you sure tou want Delete de User: " + rowData.name
+                  "Are you sure tou want Delete de Role: " + rowData.name
                 ),
             },
           ]}
