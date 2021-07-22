@@ -1,15 +1,46 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
+//import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import { Add, Delete, Edit } from "@material-ui/icons";
 import Container from "@material-ui/core/Container";
 import useStyles from "./styleListRole";
+//import useAxios from "../../hook";
 
-//import useStyles from "./styles";
+axios.defaults.baseURL = "http://localhost:3025/api";
 
 const ListRole = () => {
   const classes = useStyles();
+
+  const [response, setResponse] = useState(null);
+  const [error, setError] = useState("");
+  const [loading, setloading] = useState(true);
+  const [data, setData] = useState([]);
+
+  const fetchData = () => {
+    axios
+      .get("/role/listRole")
+      .then((res) => {
+        setResponse(res.data);
+        console.log(res.data);
+      })
+      .catch((err) => {
+        setError(err);
+        console.log(err);
+      })
+      .finally(() => {
+        setloading(false);
+    });
+  };
+
+
+  useEffect(() => {
+    fetchData();
+  }, [data]);
+
+  console.log(data.data.length)
+
   return (
     <Container className={classes.container}>
       <Card>
@@ -17,9 +48,9 @@ const ListRole = () => {
         <hr />
 
         <h3>
-          Total roles: <span>4</span>
+          Total roles: <span>{data.status}</span>
         </h3>
-
+        
         <Button>
           <Add aria-hidden="false" color="accent" /> Add role
         </Button>
