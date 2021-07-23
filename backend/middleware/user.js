@@ -4,7 +4,7 @@ const user = async (req, res, next) => { const user = await User.findById(req.us
     
 
     if (!user)
-      return res.status(401).send("Access denied");
+      return res.status(401).send({message:"Access denied"});
     next();
 };
 
