@@ -144,17 +144,17 @@ router.post("/registerAdmin", Auth, UserAuth, Admin, async (req, res) => {
   if (
     !req.body.name ||
     !req.body.userName ||
-    !req.body.email ||
+    !req.body.email || 
     !req.body.password ||
     !req.body.roleId
   )
-    return res.status(401).send("Incomplete data");
+    return res.status(401).send({message:"Incomplete data"});
 
   const checkId = mongoose.Types.ObjectId.isValid(req.body.roleId);
-  if (!checkId) return res.status(401).send("Invalid id");
+  if (!checkId) return res.status(401).send({message:"Invalid id"});
 
   let user = await User.findOne({ email: req.body.email });
-  if (user) return res.status(400).send("The user is already registered");
+  if (user) return res.status(400).send({message:"The user is already registered"});
 
   const hash = await bcrypt.hash(req.body.password, 10);
 
@@ -169,11 +169,11 @@ router.post("/registerAdmin", Auth, UserAuth, Admin, async (req, res) => {
 
   try {
     const result = await user.save();
-    if (!result) return res.status(401).send("Failed to register user");
+    if (!result) return res.status(401).send({message:"Failed to register user"});
     const jwtToken = user.generateJWT();
     res.status(200).send({ jwtToken });
   } catch (e) {
-    return res.status(400).send("Failed to register user");
+    return res.status(400).send({message:"Failed to register user"});
   }
 });
 
