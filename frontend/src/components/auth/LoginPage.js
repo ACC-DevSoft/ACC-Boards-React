@@ -31,6 +31,7 @@ const LoginPage = () => {
       .then((json) => {
         if (json.token) {
           localStorage.setItem("token", json.token);
+          localStorage.setItem("current", json.current);
           setModal(false);
         } else {
           errorSetter(json.message)
@@ -50,7 +51,7 @@ const LoginPage = () => {
   function errorSetter(state) {
     setError(!error);
     setErrorMessage(state);
-    setInterval(() => {
+    setTimeout(() => {
       setError(false);
     }, 3000);
   }

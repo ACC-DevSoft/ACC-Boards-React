@@ -11,7 +11,7 @@ router.post("/create/:id", Auth, async (req, res) => {
 	const { id } = req.params;
 
 	const validId = mongoose.Types.ObjectId.isValid(id);
-	if (!validId) return res.status(401).send("Process failed: Invalid id");
+	if (!validId) return res.status(401).send({message: "Process failed: Invalid id"});
 
 	req.body.workspace = id;
 
@@ -21,14 +21,14 @@ router.post("/create/:id", Auth, async (req, res) => {
 		!req.body.description ||
 		!req.body.techleader
 	) {
-		return res.status(400).send("Incomplete Dataaaaa");
+		return res.status(400).send({message: "Incomplete Dataaaaa"});
 	}
 
 	const user = await User.findOne({ userName: req.body.techleader });
-	if (!user) return res.status(400).send("User not found");
+	if (!user) return res.status(400).send({message: "User not found"});
 
 	const workspace = await Workspace.findById(req.body.workspace);
-	if (!workspace) return res.status(400).send("Workspace not found");
+	if (!workspace) return res.status(400).send({message: "Workspace not found"});
 
 	const board = new Board({
 		workspace: workspace._id,
@@ -40,14 +40,14 @@ router.post("/create/:id", Auth, async (req, res) => {
 	});
 	try {
 		const saveboard = await board.save();
-		if(!saveboard) return res.status(401).send("Failed process")
+		if(!saveboard) return res.status(401).send({message: "Failed process"})
 		
 		await Workspace.findByIdAndUpdate(req.body.workspace, {
 			$push: { boards: { $each: [saveboard] } },
 		});
 		return res.status(200).send({ saveboard });
 	} catch (err) {
-		res.status(400).send("Error: board no create" + err);
+		res.status(400).send({message: "Error: board no create" + err});
 	}
 });
 
