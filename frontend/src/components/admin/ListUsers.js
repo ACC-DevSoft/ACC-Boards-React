@@ -70,48 +70,47 @@ const ListUsers = () => {
   console.log(z);
 
   return (
-    <Container className={classes.container}>
-      <Card>
-        <h2>Users</h2>
-        <hr />
+    <>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      ></link>
+      <hr></hr>
 
-        <h3>
-          Total Users: <span>{data.length}</span>
-        </h3>
+      <h4>Total Users: {data.length}</h4>
+      <Button>
+        <Add aria-hidden="false" color="accent" /> Add User
+      </Button>
 
-        <Button>
-          <Add aria-hidden="false" color="accent" /> Add role
-        </Button>
-
-        <table className={classes.table}>
-          <thead className={classes.head}>
-            <tr className={classes.tr}>
-              <th className={classes.th}>Name</th>
-              <th className={classes.th}>Description</th>
-              <th className={classes.th}>Status</th>
-              <th className={classes.th}>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {data.map(user => {
-              <tr className={classes.tr}>
-              <td className={classes.td}>{user.name}</td>
-              <td className={classes.td}>Plataform admin</td>
-              <td className={classes.td}>Active</td>
-              <td className={classes.td}>
-                <Button>
-                  <Edit /> edit
-                </Button>
-                <Button>
-                  <DeleteOutline /> delete
-                </Button>
-              </td>
-            </tr>
-            })}
-          </tbody>
-        </table>
-      </Card>
-    </Container>
+      <div>
+        <MaterialTable
+          className={classes.table}
+          columns={columnas}
+          data={data}
+          title="List of Users"
+          pageSize={4}
+          // actions={[
+          //   {
+          //     icon: Edit,
+          //     tooltip: "Edit Role",
+          //     onClick: (event, rowData) =>
+          //       alert("You want to edit the user: " + rowData.name),
+          //   },
+          //   {
+          //     icon: DeleteOutline,
+          //     tooltip: "Delete Role",
+          //     onClick: (event, rowData) =>
+          //       window.confirm(
+          //         "Are you sure tou want Delete de Role: " + rowData.name
+          //       ),
+          //   },
+          // ]}
+          options={{
+            actionsColumnIndex: -1,
+          }}
+        />
+      </div>
+    </>
   );
 };
 
