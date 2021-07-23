@@ -6,8 +6,8 @@ import ListRole from './components/admin/ListRole';
 import './index.css';
 
 ReactDOM.render(
-	 <AccBoardsApp />,
-	// <Profile />,
+	 //<AccBoardsApp />,
+	 <Profile />,
 	// <ListRole />,
 
 	document.getElementById('root')
