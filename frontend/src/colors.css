@@ -1,0 +1,26 @@
+:root{
+    --gray: #f9f9fa;
+    --white: #ffffff;
+    --purple: #20123A;
+    --black: #000000;
+    --grayTwo:  #42414D;
+    --blue: #0250BB;
+}
+
+.bg-purple{
+    background-color: var(--purple);
+    color: var(--white);
+}
+.bg-blue{
+    background-color: var(--blue);
+    color: var(--white);
+}
+.bg-grayTwo{
+    background-color: var(--grayTwo);
+    color: var(--white);
+}
+
+.bg-white{
+    background-color: var(--white);
+    color: var(--grayTwo);
+}
