@@ -1,9 +1,13 @@
-import React, { useEffect, useState } from "react";
-import MaterialTable from "material-table";
-import Edit from "@material-ui/icons/Edit";
-import DeleteOutline from "@material-ui/icons/DeleteOutline";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
+import Button from "@material-ui/core/Button";
+import { Add, DeleteOutline, Edit, ZoomOutMapSharp } from "@material-ui/icons";
+import MaterialTable from "material-table";
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
+import Container from "@material-ui/core/Container";
 import useStyles from "./styleListRole";
+
 
 const baseUrl = "http://localhost:3025/api/user/listUsers";
 
@@ -34,6 +38,7 @@ axios.defaults.baseURL = "http://localhost:3025/api";
 
 const ListUsers = () => {
   const classes = useStyles();
+  
 
   const [response, setResponse] = useState(null);
   const [error, setError] = useState("");
@@ -61,39 +66,52 @@ const ListUsers = () => {
     await fetchData();
   }, []);
 
+  let z = data[1];
+  console.log(z);
+
   return (
-    <>
-      <hr></hr>
+    <Container className={classes.container}>
+      <Card>
+        <h2>Users</h2>
+        <hr />
 
-      <h4>Total Users: {data.length}</h4>
+        <h3>
+          Total Users: <span>{data.length}</span>
+        </h3>
 
-      <div>
-        <MaterialTable className={classes.table}
-          columns={columnas}
-          data={data}
-          title="Users"
-          actions={[
-            {
-              icon: Edit,
-              tooltip: "Edit User",
-              onClick: (event, rowData) =>
-                alert("You want to edit the user: " + rowData.name),
-            },
-            {
-              icon: DeleteOutline,
-              tooltip: "Delete User",
-              onClick: (event, rowData) =>
-                window.confirm(
-                  "Are you sure tou want Delete de User: " + rowData.name
-                ),
-            },
-          ]}
-          options={{
-            actionsColumnIndex: -1,
-          }}
-        />
-      </div>
-    </>
+        <Button>
+          <Add aria-hidden="false" color="accent" /> Add role
+        </Button>
+
+        <table className={classes.table}>
+          <thead className={classes.head}>
+            <tr className={classes.tr}>
+              <th className={classes.th}>Name</th>
+              <th className={classes.th}>Description</th>
+              <th className={classes.th}>Status</th>
+              <th className={classes.th}>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {data.map(user => {
+              <tr className={classes.tr}>
+              <td className={classes.td}>{user.name}</td>
+              <td className={classes.td}>Plataform admin</td>
+              <td className={classes.td}>Active</td>
+              <td className={classes.td}>
+                <Button>
+                  <Edit /> edit
+                </Button>
+                <Button>
+                  <DeleteOutline /> delete
+                </Button>
+              </td>
+            </tr>
+            })}
+          </tbody>
+        </table>
+      </Card>
+    </Container>
   );
 };
 
