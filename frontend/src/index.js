@@ -7,8 +7,8 @@ import ListUsers from './components/admin/ListUsers';
 import './index.css';
 
 ReactDOM.render(
-	 //<AccBoardsApp />,
-	 <Profile />,
+	 <AccBoardsApp />,
+	 //<Profile />,
 	// <ListRole />,
 
 	document.getElementById('root')
