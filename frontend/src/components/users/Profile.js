@@ -34,7 +34,7 @@ const Profile = () => {
           <List role="list">
             <ListItem role="listitem">Pepe</ListItem>
             <ListItem role="listitem">pepe@gmail.com</ListItem>
-            <ListItem role="listitem">pepe UwU</ListItem>
+            <ListItem role="listitem">pepe</ListItem>
             <ListItem role="listitem">activo</ListItem>
           </List>
         </CardContent>
