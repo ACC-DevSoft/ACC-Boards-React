@@ -32,19 +32,14 @@ const AddUser = () => {
     })
       .then((response) => response.json())
       .then((json) => {
-        if (json.token) {
-          localStorage.setItem("token", json.token);
-          setModal(false);
+        if (!json.message) {
+          errorSetter("User Register", "success");
         } else {
-          if (!json.message) {
-            errorSetter("User Register","success");
-          } else {
-            errorSetter(json.message);
-          }
+          errorSetter(json.message);
         }
       })
       .catch((err) => errorSetter(err));
-  };
+  }
 
   async function fetchListRoleApi() {
     await fetch("http://localhost:3025/api/role/listRole", {
@@ -55,10 +50,10 @@ const AddUser = () => {
       },
     })
       .then((response) => response.json())
-      .then((json) => roleList = json.roles)
+      .then((json) => (roleList = json.roles))
       .catch((err) => setErrorMessage("Server error"));
-    abrirModal()
-  };
+    abrirModal();
+  }
 
   function verifyData(state) {
     if (
@@ -73,7 +68,7 @@ const AddUser = () => {
     } else {
       fetchRegisterApi(state);
     }
-  };
+  }
 
   function errorSetter(state, severitymsg) {
     if (severitymsg) {
@@ -86,7 +81,7 @@ const AddUser = () => {
       severityState = "error";
       setModal(!modal);
     }, 3000);
-  };
+  }
 
   const abrirModal = () => {
     setModal(!modal);
@@ -113,7 +108,7 @@ const AddUser = () => {
     console.log(state);
   };
 
-  const LoginForm = (
+  const AddUserForm = (
     <Card className="element">
       <h1>Register User</h1>
       <hr className="spacer"></hr>
@@ -142,7 +137,9 @@ const AddUser = () => {
           name="name"
           type="text"
           placeholder="Name"
-          onChange={(event) => {valueToStateName(event.target);}}
+          onChange={(event) => {
+            valueToStateName(event.target);
+          }}
         />
         <TextField
           className="TextField"
@@ -173,9 +170,11 @@ const AddUser = () => {
           select
           onChange={(event) => valueToStateRole(event.target)}
         >
-          {roleList.map((role, i) => 
-          <MenuItem key={i} value={role._id}>{role.name}</MenuItem>
-          )}
+          {roleList.map((role, i) => (
+            <MenuItem key={i} value={role._id}>
+              {role.name}
+            </MenuItem>
+          ))}
         </TextField>
       </form>
       <div className="mat-dialog-actions">
@@ -192,11 +191,13 @@ const AddUser = () => {
   return (
     <section>
       <Modal open={modal} onClose={() => setModal(false)}>
-        {LoginForm}
+        {AddUserForm}
       </Modal>
       <Button
         className={"width: '100%' , marginTop: '10px'"}
-        onClick={() => {fetchListRoleApi()}}
+        onClick={() => {
+          fetchListRoleApi();
+        }}
       >
         Add User
       </Button>
