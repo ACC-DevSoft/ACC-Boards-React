@@ -22,8 +22,8 @@ router.post("/registerRole", Auth, UserAuth, Admin, async(req, res) =>{
     if(!result) return res.status().send({message:"Failed to register role"});
     return res.status(200).send({ result });
 });
-
-router.get("/listRole", Auth, Admin, async (req, res) => {
+//, Auth, Admin,
+router.get("/listRole", async (req, res) => {
   const roles = await Role.find();
   if (!roles) return res.status(401).send("No roles");
   return res.status(200).send({ roles });
