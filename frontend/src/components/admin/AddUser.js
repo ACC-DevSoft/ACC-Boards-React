@@ -5,6 +5,7 @@ import {
   Button,
   IconButton,
   Collapse,
+  MenuItem,
 } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
 import Card from "@material-ui/core/Card";
@@ -12,6 +13,8 @@ import "./AddUser.css";
 import Alert from "@material-ui/lab/Alert";
 
 const state = { name: "", userName: "", email: "", password: "", roleId: "" };
+let roleList = [];
+let severityState = "error";
 
 const AddUser = () => {
   const [modal, setModal] = useState(false);
@@ -29,19 +32,17 @@ const AddUser = () => {
     })
       .then((response) => response.json())
       .then((json) => {
-        if (json.token) {
-          localStorage.setItem("token", json.token);
-          setModal(false);
+        if (!json.message) {
+          errorSetter("User Register", "success");
         } else {
           errorSetter(json.message);
         }
       })
-      .catch((err) => setErrorMessage("Server error"));
+      .catch((err) => errorSetter(err));
   }
 
   async function fetchListRoleApi() {
-    let roleList = [];
-    await fetch("http://localhost:3025/api/user/registerAdmin", {
+    await fetch("http://localhost:3025/api/role/listRole", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -51,7 +52,7 @@ const AddUser = () => {
       .then((response) => response.json())
       .then((json) => (roleList = json.roles))
       .catch((err) => setErrorMessage("Server error"));
-    return roleList;
+    abrirModal();
   }
 
   function verifyData(state) {
@@ -69,11 +70,16 @@ const AddUser = () => {
     }
   }
 
-  function errorSetter(state) {
+  function errorSetter(state, severitymsg) {
+    if (severitymsg) {
+      severityState = severitymsg;
+    }
     setError(!error);
     setErrorMessage(state);
-    setInterval(() => {
+    setTimeout(() => {
       setError(false);
+      severityState = "error";
+      setModal(!modal);
     }, 3000);
   }
 
@@ -85,12 +91,10 @@ const AddUser = () => {
     state.name = name.value;
     console.log(state);
   };
-
   const valueToStateUserName = (userName) => {
     state.userName = userName.value;
     console.log(state);
   };
-
   const valueToStateEmail = (email) => {
     state.email = email.value;
     console.log(state);
@@ -104,7 +108,7 @@ const AddUser = () => {
     console.log(state);
   };
 
-  const LoginForm = (
+  const AddUserForm = (
     <Card className="element">
       <h1>Register User</h1>
       <hr className="spacer"></hr>
@@ -122,7 +126,7 @@ const AddUser = () => {
               <CloseIcon fontSize="inherit" />
             </IconButton>
           }
-          severity="error"
+          severity={severityState}
         >
           {errorMessage}
         </Alert>
@@ -133,7 +137,9 @@ const AddUser = () => {
           name="name"
           type="text"
           placeholder="Name"
-          onChange={(event) => valueToStateName(event.target)}
+          onChange={(event) => {
+            valueToStateName(event.target);
+          }}
         />
         <TextField
           className="TextField"
@@ -160,9 +166,16 @@ const AddUser = () => {
           className="TextField"
           name="RoleId"
           type="text"
-          placeholder="Role"
+          label="Role"
+          select
           onChange={(event) => valueToStateRole(event.target)}
-        />
+        >
+          {roleList.map((role, i) => (
+            <MenuItem key={i} value={role._id}>
+              {role.name}
+            </MenuItem>
+          ))}
+        </TextField>
       </form>
       <div className="mat-dialog-actions">
         <Button className="btn gray" onClick={() => setModal(!modal)}>
@@ -178,13 +191,15 @@ const AddUser = () => {
   return (
     <section>
       <Modal open={modal} onClose={() => setModal(false)}>
-        {LoginForm}
+        {AddUserForm}
       </Modal>
       <Button
         className={"width: '100%' , marginTop: '10px'"}
-        onClick={() => abrirModal()}
+        onClick={() => {
+          fetchListRoleApi();
+        }}
       >
-        Add User
+        + Add User
       </Button>
     </section>
   );
