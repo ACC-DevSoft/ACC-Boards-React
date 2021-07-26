@@ -104,7 +104,7 @@ const LoginPage = () => {
         />
         <TextField
           name="password"
-          type="text"
+          type="password"
           placeholder="password"
           onChange={(event) => valueToStatePassword(event.target)}
         />

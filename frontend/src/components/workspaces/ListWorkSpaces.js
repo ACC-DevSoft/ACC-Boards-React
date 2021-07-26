@@ -3,6 +3,7 @@ import { Button, Container, Typography,Card, CardContent, Modal,Paper, TextField
 import { Link } from 'react-router-dom';
 import { Add, People, Delete } from "@material-ui/icons";
 import AddWorkSpaces from './AddWorkSpaces';
+import SaveBoard from '../boards/SaveBoard'
 import  "./Styles.css";
 const ListWorkSpaces = () => {
 
@@ -53,14 +54,14 @@ const ListWorkSpaces = () => {
                             <h3>workSpace</h3>
                        </div>
                        <div className="col">
-                            <Button variant="outlined" color="primary"><Add/>Add Board</Button>
-                            <Button variant="contained" color="primary"><People/>&nbsp;members</Button>
-                            <Button variant="contained" color="secondary"><Delete/>Delete</Button>
+                       <SaveBoard id={localStorage.getItem("currentW")} />
+                            {/* <Button variant="contained" color="primary"><People/>&nbsp;members</Button>
+                            <Button variant="contained" color="secondary"><Delete/>Delete</Button> */}
                        </div>
                    </div>
                    <hr/>
                    <CardContent>
-                       <Link to="/" className="link">
+                       <Link to="/ListTask" className="link">
                         <div  variant="outlined" className="board bg-grayTwo">
                             <Typography color="darks">Board</Typography>
                         </div>

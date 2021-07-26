@@ -70,22 +70,6 @@ const ListRole = () => {
           data={data}
           title="List of roles"
           pageSize={4}
-          // actions={[
-          //   {
-          //     icon: Edit,
-          //     tooltip: "Edit Role",
-          //     onClick: (event, rowData) =>
-          //       alert("You want to edit the user: " + rowData.name),
-          //   },
-          //   {
-          //     icon: DeleteOutline,
-          //     tooltip: "Delete Role",
-          //     onClick: (event, rowData) =>
-          //       window.confirm(
-          //         "Are you sure tou want Delete de Role: " + rowData.name
-          //       ),
-          //   },
-          // ]}
           options={{
             actionsColumnIndex: -1,
           }}
