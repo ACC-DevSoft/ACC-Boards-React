@@ -11,30 +11,12 @@ import ListUsers from "./components/admin/ListUsers";
 import LoginPage from './components/auth/LoginPage';
 import RegisterPage from './components/auth/RegisterPage';
 import AddUser from './components/admin/AddUser';
+import AppRouter from './routers/AppRouter';
 
 
 function AccBoardsApp() {
 	return (
-		<>
-		<Router>
-			<Navbar />
-			<Switch>
-				<Route path="/" exact><Home/></Route>
-				<Route path="/WorkSpaces" ><ListWorkSpaces/></Route>
-				<Route path="/Profile" ><Profile/></Route>
-				<Route path="/ListRole" ><ListRole/></Route>
-				<Route path="/ListUsers" ><ListUsers/></Route>
-				<Route path="/register" ><RegisterPage/></Route>
-				<Route path="/Login" ><LoginPage/></Route>
-
-			</Switch>
-		</Router>
-		</>
-			// <AddUser />
-			// <LoginPage />
-		// <div>
-		// 	<h1>Acc Boards App</h1>
-		// </div>
+		<AppRouter />
 	)
 }
 export default AccBoardsApp;
