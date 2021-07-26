@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import MaterialTable from "material-table";
 import useStyles from "./styleListRole";
-import RegisterRole from "./RegisterRoles";
+import RegisterRole from "./RegisterRole";
 
 axios.defaults.baseURL = "http://localhost:3025/api";
 
