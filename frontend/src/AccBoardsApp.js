@@ -12,6 +12,8 @@ import LoginPage from './components/auth/LoginPage';
 import RegisterPage from './components/auth/RegisterPage';
 import AddUser from './components/admin/AddUser';
 import RegisterRole from './components/admin/RegisterRole';
+import AddWorkSpaces from './components/workspaces/AddWorkSpaces';
+import SaveBoard from './components/boards/SaveBoard';
 
 
 function AccBoardsApp() {
@@ -31,6 +33,8 @@ function AccBoardsApp() {
 			<AddUser />
 			<LoginPage />
 			<RegisterRole />
+			<AddWorkSpaces id={localStorage.getItem("current")}/>
+			<SaveBoard id={localStorage.getItem("currentW")}/>
 		</section>
 			</Switch>
 		</Router>

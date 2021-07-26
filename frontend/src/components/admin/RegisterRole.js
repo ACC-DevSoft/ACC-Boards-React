@@ -53,7 +53,7 @@ const RegisterRole = () => {
     }
     setError(!error);
     setErrorMessage(state);
-    setInterval(() => {
+    setTimeout(() => {
       setError(false);
       severityState = "error";
       setModal(!modal);
