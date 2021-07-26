@@ -1,20 +1,15 @@
 import React from 'react';
 import './AccBoards.css';
-import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import Navbar from "./components/home/Navbar";
 import Home from "./components/home/Home";
+import ListWorkSpaces from "./components/workspaces/ListWorkSpaces";
 import Profile from './components/users/Profile';
 import ListWorkSpaces from "./components/workspaces/ListWorkSpaces";
 import ListRole from './components/admin/ListRole';
 import ListUsers from "./components/admin/ListUsers";
-// import AddWorkSpaces from './components/workspaces/AddWorkSpaces';
 import LoginPage from './components/auth/LoginPage';
 import RegisterPage from './components/auth/RegisterPage';
-import AddUser from './components/admin/AddUser';
-import RegisterRole from './components/admin/RegisterRole';
-import AddWorkSpaces from './components/workspaces/AddWorkSpaces';
-import SaveBoard from './components/boards/SaveBoard';
-
 
 function AccBoardsApp() {
 	return (
@@ -29,24 +24,12 @@ function AccBoardsApp() {
 				<Route path="/ListUsers" ><ListUsers/></Route>
 				<Route path="/register" ><RegisterPage/></Route>
 				<Route path="/Login" ><LoginPage/></Route>
-		<section>
-			<AddUser />
-			<LoginPage />
-			<RegisterRole />
-			<AddWorkSpaces id={localStorage.getItem("current")}/>
-			<SaveBoard id={localStorage.getItem("currentW")}/>
-		</section>
 			</Switch>
 		</Router>
 		</>
 	);
 };
 
-			// <AddUser />
-			// <LoginPage />
-		// <div>
-		// 	<h1>Acc Boards App</h1>
-		// </div>
 
 export default AccBoardsApp;
 
