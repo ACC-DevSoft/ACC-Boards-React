@@ -4,8 +4,8 @@ import Edit from "@material-ui/icons/Edit";
 import DeleteOutline from "@material-ui/icons/DeleteOutline";
 import axios from "axios";
 import useStyles from "./styleListRole";
+import AddUser from "./AddUser";
 
-const baseUrl = "http://localhost:3025/api/user/listUsers";
 
 const columnas = [
   {
@@ -66,7 +66,7 @@ const ListUsers = () => {
       <hr></hr>
 
       <h4>Total Users: {data.length}</h4>
-
+      <AddUser/>
       <div>
         <MaterialTable className={classes.table}
           columns={columnas}

@@ -2,6 +2,7 @@ import React, {useSate, useState} from 'react';
 import { Button, Container, Typography,Card, CardContent, Modal,Paper, TextField} from "@material-ui/core";
 import { Link } from 'react-router-dom';
 import { Add, People, Delete } from "@material-ui/icons";
+import AddWorkSpaces from './AddWorkSpaces';
 import  "./Styles.css";
 const ListWorkSpaces = () => {
 
@@ -31,7 +32,7 @@ const ListWorkSpaces = () => {
     return (
         <Container className="container">
             <Typography variant="h5">WorkSpaces</Typography>
-            <Button className="btn-purple"  variant="contained" color="primary" onClick={openForm}><Add/>Add workspaces</Button>
+            <AddWorkSpaces id={localStorage.getItem("current")}/>
             <hr/>
             <Modal open={open} onClose={closeForm}  aria-labelledby="simple-modal-title"
                 aria-describedby="simple-modal-description">

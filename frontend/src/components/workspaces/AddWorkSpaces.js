@@ -1,73 +1,149 @@
 import React, { useState } from "react";
-import { Modal, TextField, Button } from "@material-ui/core";
-import Card from '@material-ui/core/Card';
+import {
+  Modal,
+  TextField,
+  Button,
+  IconButton,
+  Collapse,
+} from "@material-ui/core";
+import CloseIcon from "@material-ui/icons/Close";
+import Card from "@material-ui/core/Card";
+import "./AddWorkSpaces.css";
+import Alert from "@material-ui/lab/Alert";
 
-async function fetchLoginApi(state) {
-	await fetch("http://localhost:3025/api/auth/login", {
-	  method: "POST",
-	  headers: {
-		'Content-Type': 'application/json',
-	  },
-	  body: JSON.stringify(state),
-	  })
-	  .then(response => response.json())
-	  .then(json => {
-		localStorage.setItem("token", json.token);
-	  })
-	  .catch(err => {return err});
+const state = { name: "", description: "", members: [], boards: [] };
+let severityState = "error";
+
+const AddWorkSpaces = ({id}) => {
+  const [modal, setModal] = useState(false);
+  const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+
+  async function fetchAddWorkSpaceApi(state) {
+    await fetch(`http://localhost:3025/api/workspace/newWorkSpace/${id}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+      body: JSON.stringify(state),
+    })
+      .then((response) => response.json())
+      .then((json) => {
+        if (!json.message) {
+          localStorage.setItem("currentW", json.result._id);
+          errorSetter("Workspace Register", "success");
+		      console.log(json.result._id);
+        } else {
+          errorSetter(json.message);
+        }
+      })
+      .catch((err) => errorSetter(err));
+  }
+
+  function verifyData(state) {
+    if (state.name === "" || state.description === "") {
+      errorSetter("Incomplete Data");
+    } else {
+		fetchAddWorkSpaceApi(state);
+    }
+  }
+
+  function errorSetter(state, severitymsg) {
+    if (severitymsg) {
+      severityState = severitymsg;
+    }
+    setError(!error);
+    setErrorMessage(state);
+    setTimeout(() => {
+      setError(false);
+      severityState = "error";
+      setModal(false);
+    }, 3000);
+  }
+
+  const abrirModal = () => {
+    setModal(true);
   };
 
-const AddWorkSpaces = () => {
-	
-	const [modal, setModal] = useState(false);
+  const valueToStateName = (name) => {
+    state.name = name.value;
+    console.log(state);
+  };
+  const valueToStateDescription = (description) => {
+    state.description = description.value;
+    console.log(state);
+  };
 
-	const abrirModal = () => {
-	  setModal(!modal);
-	};
-  
-	const state = {email: "", password: ""};
-  
-	const valueToStateEmail = (email) => {
-	  state.email = email.value;
-	  console.log(state);
-	}
-	const valueToStatePassword = (password) => {
-	  state.password = password.value;
-	  console.log(state); 
-	}
-  
-	const LoginForm = (
-	  <Card className="element">
-		<h1>Login</h1>
-		<hr className="spacer"></hr>
-		<div className="content-img">
-		  <img className="Img" alt="Acc-Board logo"/>
-		</div>
-		<form className="form-content-inputs">
-		  <TextField name="email" type="text" placeholder="email" onChange={event => valueToStateEmail(event.target)}/>
-		  <TextField name="password" type="text" placeholder="password" onChange={event => valueToStatePassword(event.target)}/>
-		</form>
-		<div className="mat-dialog-actions">
-		  <span>Create an account <a onClick={() => setModal(false)} href="#">Sign Up</a></span>
-		  <Button className="btn" onClick={() => fetchLoginApi(state)}>Login</Button>
-		</div>
-	  </Card >
-	  
-	);
-  
-	return (
-	  <section>
-		<Modal open={modal} onClose={() => setModal(false)}>
-		  {LoginForm}
-		</Modal>
-		<Button
-		  className={"width: '100%' , marginTop: '10px'"}
-		  onClick={() => abrirModal()}
-		>
-		  Login
-		</Button>
-	  </section>
-	);
+  const WorkspaceForm = (
+    <Card className="element">
+      <h1>Add Workspace</h1>
+      <hr className="spacer"></hr>
+      <Collapse in={error}>
+        <Alert
+          action={
+            <IconButton
+              aria-label="close"
+              color="inherit"
+              size="small"
+              onClick={() => {
+                setError(false);
+              }}
+            >
+              <CloseIcon fontSize="inherit" />
+            </IconButton>
+          }
+          severity={severityState}
+        >
+          {errorMessage}
+        </Alert>
+      </Collapse>
+      <form className="form-content-inputs">
+        <TextField
+          className="TextField"
+          name="name"
+          type="text"
+          placeholder="Name"
+          onChange={(event) => {
+            valueToStateName(event.target);
+          }}
+        />
+        <TextField
+          className="TextField"
+          name="description"
+          type="text"
+          placeholder="Description"
+          onChange={(event) => valueToStateDescription(event.target)}
+        />
+      </form>
+      <div className="mat-dialog-actions">
+        <Button className="btn gray" onClick={() => setModal(false)}>
+          Cancel
+        </Button>
+        <Button className="btn" onClick={() => verifyData(state)}>
+          Register
+        </Button>
+      </div>
+    </Card>
+  );
+
+  return (
+    <section>
+      <Modal open={modal} onClose={() => setModal(false)}>
+        {WorkspaceForm}
+      </Modal>
+      <Button
+        className="btn-purple"  
+        variant="contained" 
+        color="primary"
+        onClick={() => {
+          abrirModal();
+        }}
+      >
+        Add Workspace
+      </Button>
+    </section>
+  );
 };
 
 export default AddWorkSpaces;

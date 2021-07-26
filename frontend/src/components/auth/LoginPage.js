@@ -31,6 +31,7 @@ const LoginPage = () => {
       .then((json) => {
         if (json.token) {
           localStorage.setItem("token", json.token);
+          localStorage.setItem("current", json.current);
           setModal(false);
         } else {
           errorSetter(json.message)
@@ -50,7 +51,7 @@ const LoginPage = () => {
   function errorSetter(state) {
     setError(!error);
     setErrorMessage(state);
-    setInterval(() => {
+    setTimeout(() => {
       setError(false);
     }, 3000);
   }
@@ -111,7 +112,7 @@ const LoginPage = () => {
       <div className="mat-dialog-actions">
         <span>
           Create an account{" "}
-          <a onClick={() => setModal(false)} href="#">
+          <a onClick={() => setModal(false)} href="/">
             Sign Up
           </a>
         </span>
@@ -128,7 +129,7 @@ const LoginPage = () => {
         {LoginForm}
       </Modal>
       <Button
-        className={"width: '100%' , marginTop: '10px'"}
+        className="btn"
         onClick={() => abrirModal()}
       >
         Login

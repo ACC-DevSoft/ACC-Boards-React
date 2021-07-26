@@ -7,10 +7,10 @@ const UserAuth = require("../middleware/user");
 
 const Role = require("../models/role");
 router.post("/registerRole", Auth, UserAuth, Admin, async(req, res) =>{
-    if(!req.body.name ||  !req.body.description)return res.status(400).send("Incomplete data.");
+    if(!req.body.name ||  !req.body.description)return res.status(400).send({message: "Incomplete data."});
 
     const roleExist = await Role.findOne({name: req.body.name});
-    if(roleExist) return res.status(400).send("the role already exists.");
+    if(roleExist) return res.status(400).send({message:"the role already exists."});
 
     const role = new  Role({
         name : req.body.name,
@@ -19,7 +19,7 @@ router.post("/registerRole", Auth, UserAuth, Admin, async(req, res) =>{
     });
 
     const result = await role.save();
-    if(!result) return res.status().send("Failed to register role");
+    if(!result) return res.status().send({message:"Failed to register role"});
     return res.status(200).send({ result });
 });
 //, Auth, Admin,

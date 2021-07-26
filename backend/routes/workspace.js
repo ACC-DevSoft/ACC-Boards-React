@@ -14,18 +14,17 @@ router.post('/newWorkSpace/:id', Auth, async (req, res) => {
 	if (!validId) return res.status(401).send('Process failed: Invalid id');
 
 	if (!req.body._id || !req.body.name)
-		return res.status(400).send('Incomplete Data.');
+		return res.status(400).send({message:'Incomplete Data.'});
 
 	const user = await User.findById({ _id: req.body._id });
 
 	// consultar los espacios de trabajo por usuario
-	// const workSpaceById = await Workspace.find({Admin: req.body._id});
 	const workSpaceById = await Workspace.find({ Admin: user._id });
 
 	const workSpaceExist = await Workspace.findOne({ name: req.body.name });
 
 	if (workSpaceExist)
-		return res.status(400).send('the workSpace already exists');
+		return res.status(400).send({message: 'the workSpace already exists'});
 
 	const workSpace = new Workspace({
 		Admin: req.user._id,
@@ -36,7 +35,7 @@ router.post('/newWorkSpace/:id', Auth, async (req, res) => {
 		status: true,
 	});
 	const result = await workSpace.save();
-	if (!result) return res.status().send('Failed to add workSpace');
+	if (!result) return res.status().send({message:'Failed to add workSpace'});
 
 	user.workSpacesId.push(result);
 	await user.save();

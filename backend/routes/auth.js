@@ -27,7 +27,7 @@ router.post("/login", async (req, res) => {
       status:user.status,
     }
     let current = user.id;
-    return res.status(200).send({ token:jwtToken, user:userSend, role:role,current });
+    return res.status(200).send({ token:jwtToken, user:userSend, role:role, current:current });
   } catch (e) {
     return res.status(400).send({ message:"Login error"});
   }
