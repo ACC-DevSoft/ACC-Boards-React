@@ -7,9 +7,8 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Container from "@material-ui/core/Container";
 import useStyles from "./styleListRole";
+import AddUser from "./AddUser";
 
-
-const baseUrl = "http://localhost:3025/api/user/listUsers";
 
 const columnas = [
   {
@@ -78,10 +77,7 @@ const ListUsers = () => {
       <hr></hr>
 
       <h4>Total Users: {data.length}</h4>
-      <Button>
-        <Add aria-hidden="false" color="accent" /> Add User
-      </Button>
-
+      <AddUser/>
       <div>
         <MaterialTable
           className={classes.table}

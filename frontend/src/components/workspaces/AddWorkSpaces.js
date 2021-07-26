@@ -133,7 +133,9 @@ const AddWorkSpaces = ({id}) => {
         {WorkspaceForm}
       </Modal>
       <Button
-        className={"width: '100%' , marginTop: '10px'"}
+        className="btn-purple"  
+        variant="contained" 
+        color="primary"
         onClick={() => {
           abrirModal();
         }}

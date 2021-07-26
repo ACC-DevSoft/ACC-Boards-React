@@ -11,6 +11,10 @@ h1 {
     font-style: italic;
 }
 
+.white {
+    color: white;
+}
+
 .form-content-inputs {
     display:flex; 
     flex-direction: column;

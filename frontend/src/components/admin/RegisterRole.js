@@ -136,7 +136,7 @@ const RegisterRole = () => {
           abrirModal();
         }}
       >
-        Register Role
+        + Register Role
       </Button>
     </section>
   );

@@ -112,7 +112,7 @@ const LoginPage = () => {
       <div className="mat-dialog-actions">
         <span>
           Create an account{" "}
-          <a onClick={() => setModal(false)} href="#">
+          <a onClick={() => setModal(false)} href="/">
             Sign Up
           </a>
         </span>
@@ -129,7 +129,7 @@ const LoginPage = () => {
         {LoginForm}
       </Modal>
       <Button
-        className={"width: '100%' , marginTop: '10px'"}
+        className="btn"
         onClick={() => abrirModal()}
       >
         Login
