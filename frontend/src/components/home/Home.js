@@ -19,8 +19,8 @@ export default function Home(){
                 </div>
             </div>
             <div className="content-btn">
-                    <Link to="/register" className="btn-start">Empezar</Link>
-                {/* <Button variant="contained" color="primary">Empezar</Button> */}
+                    <Link to="/register" className="btn-start">Get enrolled!</Link>
+                {/* <Button variant="contained" color="primary">Get enrolled!</Button> */}
             </div>
         </Container>
     )
