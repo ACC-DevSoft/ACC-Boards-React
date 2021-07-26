@@ -27,7 +27,7 @@ export default function Navbar (){
                 <Link className="btn" to="/Profile">Profile</Link>
                 <Link className="btn-stroked" to="/register">Sign Up</Link>
                 {/* <Link className="btn-stroked"> */}
-                <LoginPage/> 
+                {/* <LoginPage/>  */}
                 {/* </Link> */}
                 {/* <Link className="btn-stroked" to="/Login">Login</Link> */}
             </div>
