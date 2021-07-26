@@ -5,7 +5,6 @@ import Navbar from "./components/home/Navbar";
 import Home from "./components/home/Home";
 import ListWorkSpaces from "./components/workspaces/ListWorkSpaces";
 import Profile from './components/users/Profile';
-import ListWorkSpaces from "./components/workspaces/ListWorkSpaces";
 import ListRole from './components/admin/ListRole';
 import ListUsers from "./components/admin/ListUsers";
 import LoginPage from './components/auth/LoginPage';
