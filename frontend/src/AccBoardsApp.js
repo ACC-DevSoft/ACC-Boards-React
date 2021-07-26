@@ -5,6 +5,7 @@ import Navbar from "./components/home/Navbar";
 import Home from "./components/home/Home";
 import ListWorkSpaces from "./components/workspaces/ListWorkSpaces";
 import Profile from './components/users/Profile';
+import ListWorkSpaces from "./components/workspaces/ListWorkSpaces";
 import ListRole from './components/admin/ListRole';
 import ListUsers from "./components/admin/ListUsers";
 import LoginPage from './components/auth/LoginPage';
@@ -23,16 +24,12 @@ function AccBoardsApp() {
 				<Route path="/ListUsers" ><ListUsers/></Route>
 				<Route path="/register" ><RegisterPage/></Route>
 				<Route path="/Login" ><LoginPage/></Route>
-
 			</Switch>
 		</Router>
 		</>
-			// <AddUser />
-			// <LoginPage />
-		// <div>
-		// 	<h1>Acc Boards App</h1>
-		// </div>
-	)
-}
+	);
+};
+
+
 export default AccBoardsApp;
 

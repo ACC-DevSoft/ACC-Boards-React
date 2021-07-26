@@ -20,6 +20,9 @@ export default function Navbar (){
                 <Link  className="btn" to="/ListUsers">ListUsers</Link>
                 <Link  className="btn" to="/ListRole">ListRole</Link>
             </div>
+                <Link className="btn-stroked">
+                    <LoginPage className="btn-stroked" color="secundary"/>    
+                </Link>
             <div className="nav-items">
                 <Link className="btn" to="/Profile">Profile</Link>
                 <Link className="btn-stroked" to="/register">Sign Up</Link>
