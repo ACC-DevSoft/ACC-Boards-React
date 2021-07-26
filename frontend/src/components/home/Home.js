@@ -9,8 +9,8 @@ export default function Home(){
         <Container  className="container" >
             <div className="row">
                 <div className="text-home col col-sm-7">
-                    <h1 className="title">Toma el control de tus tareas y espacios de trabajo</h1>
-                    <p>Maneja <span>tareas</span> de forma organizada, controla tu <span>equipo de trabajo</span> y mejora tus tiempos prodcutivos.</p>
+                    <h1 className="title">Take control of your tasks and workspaces</h1>
+                <p>Manage your <span>tasks</span> in an organized way, control your <span>work team</span> and improve your productive times</p>
                 </div>
                 <div className="col col-sm-5">
                     <div className="content-img">
